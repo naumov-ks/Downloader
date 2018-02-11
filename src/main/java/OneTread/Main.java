@@ -21,14 +21,15 @@ public static void main(String[] args) throws Exception {
 		URL url= new URL(ads);
         URLConnection yc = url.openConnection();
         int size=yc.getContentLength();
-        System.out.println(size);
-        byte[] buffer=new byte[8192];
-        
+        System.out.println(size);               
         final RateLimiter rateLimiter = RateLimiter.create(10000.0);
         
         try{
         	long startTime=System.currentTimeMillis();
         	in=yc.getInputStream();
+        	int buffersize=in.available();
+        	System.out.println("Размер буффера "+buffersize);
+        	byte[] buffer=new byte[buffersize];
         	out=new FileOutputStream("copy2.jpg");
 			int a;
 			while((a=in.read(buffer))!=-1){
