@@ -5,23 +5,30 @@ import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.LinkedList;
+import java.util.concurrent.ConcurrentLinkedQueue;
 
-public class DGListFromFile implements getGoalListFiles {
+
+public class DGListFromFile {
+
 private String pathFile;
 private ArrayList<GoalDownload> listFiles=new ArrayList<GoalDownload>();
-	
+private LinkedList<GoalDownload> linkedListFiles=new LinkedList<GoalDownload>();
+private ConcurrentLinkedQueue<GoalDownload> listFilesS=new ConcurrentLinkedQueue<GoalDownload>();
+
 DGListFromFile(String pathFile){
 	this.pathFile=pathFile;
 }
 	
-	
-public ArrayList<GoalDownload> getListFiles(){
+
+
+public ConcurrentLinkedQueue<GoalDownload> getListFiles(){
 
 try(BufferedReader br=new BufferedReader(new FileReader(pathFile)))	{
 String text;	
 while((text=br.readLine())!=null){
 String[] goalString=text.replace("\n", "").split(" ");
-listFiles.add(new GoalDownload(goalString[0], goalString[1]));
+listFilesS.add(new GoalDownload(goalString[0], goalString[1]));
 
 }
 } catch (FileNotFoundException e) {
@@ -31,9 +38,8 @@ listFiles.add(new GoalDownload(goalString[0], goalString[1]));
 	// TODO Auto-generated catch block
 	e.printStackTrace();
 }
-return listFiles;
+return listFilesS;
 }
-	
 
 	
 	
