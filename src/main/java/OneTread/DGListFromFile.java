@@ -4,16 +4,15 @@ import java.io.BufferedReader;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.LinkedList;
+
 import java.util.concurrent.ConcurrentLinkedQueue;
 
 
 public class DGListFromFile {
 
 private String pathFile;
-private ArrayList<GoalDownload> listFiles=new ArrayList<GoalDownload>();
-private LinkedList<GoalDownload> linkedListFiles=new LinkedList<GoalDownload>();
+
+
 private ConcurrentLinkedQueue<GoalDownload> listFilesS=new ConcurrentLinkedQueue<GoalDownload>();
 
 DGListFromFile(String pathFile){
